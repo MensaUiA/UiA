@@ -1,0 +1,16 @@
+.root {
+    -fx-alignment: center;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+    -fx-background-color: fff;
+    -fx-font-family: Helvetica;
+
+}
+
+.title {
+    -fx-font-size: 18;
+}
+
+.pane {
+    -fx-background-color: indianred;
+}
