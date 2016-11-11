@@ -5,6 +5,7 @@
  */
 package slitappilication;
 
+import Framework.Managers.UserManager;
 import SlitServer.NewSessionBeanRemote;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,8 @@ public class NewClass {
             throw new RuntimeException(ne);
         }
     }
+    
+    private UserManager userManager = new UserManager(); 
     
     public String getBusinessMethod()
     {
