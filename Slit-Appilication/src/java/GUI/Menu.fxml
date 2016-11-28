@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="vbox" prefHeight="400" prefWidth="800"
+<VBox id="vbox"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="GUI.Controllers.MenuController">
     <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
