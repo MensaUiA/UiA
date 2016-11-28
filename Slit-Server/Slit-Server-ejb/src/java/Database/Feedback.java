@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -40,41 +42,53 @@ public class Feedback implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "Feedback_ID")
+    private Integer feedbackID;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 5)
-    @Column(name = "Feedback_ID")
-    private String feedbackID;
-    @Size(max = 200)
+    @Size(min = 1, max = 200)
     @Column(name = "Feedback_comment")
     private String feedbackcomment;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "Feedback_score")
-    private Integer feedbackscore;
+    private int feedbackscore;
     @Size(max = 13)
     @Column(name = "Feedback_status")
     private String feedbackstatus;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "Date_received")
     @Temporal(TemporalType.DATE)
     private Date datereceived;
     @JoinColumn(name = "FK_Deliverable_ID", referencedColumnName = "Deliverable_ID")
     @ManyToOne
     private Deliverable fKDeliverableID;
-    @JoinColumn(name = "FK_Teacher_ID", referencedColumnName = "Teacher_ID")
+    @JoinColumn(name = "FK_Users_ID", referencedColumnName = "User_ID")
     @ManyToOne
-    private Teacher fKTeacherID;
+    private Userlist fKUsersID;
 
     public Feedback() {
     }
 
-    public Feedback(String feedbackID) {
+    public Feedback(Integer feedbackID) {
         this.feedbackID = feedbackID;
     }
 
-    public String getFeedbackID() {
+    public Feedback(Integer feedbackID, String feedbackcomment, int feedbackscore, Date datereceived) {
+        this.feedbackID = feedbackID;
+        this.feedbackcomment = feedbackcomment;
+        this.feedbackscore = feedbackscore;
+        this.datereceived = datereceived;
+    }
+
+    public Integer getFeedbackID() {
         return feedbackID;
     }
 
-    public void setFeedbackID(String feedbackID) {
+    public void setFeedbackID(Integer feedbackID) {
         this.feedbackID = feedbackID;
     }
 
@@ -86,11 +100,11 @@ public class Feedback implements Serializable {
         this.feedbackcomment = feedbackcomment;
     }
 
-    public Integer getFeedbackscore() {
+    public int getFeedbackscore() {
         return feedbackscore;
     }
 
-    public void setFeedbackscore(Integer feedbackscore) {
+    public void setFeedbackscore(int feedbackscore) {
         this.feedbackscore = feedbackscore;
     }
 
@@ -118,12 +132,12 @@ public class Feedback implements Serializable {
         this.fKDeliverableID = fKDeliverableID;
     }
 
-    public Teacher getFKTeacherID() {
-        return fKTeacherID;
+    public Userlist getFKUsersID() {
+        return fKUsersID;
     }
 
-    public void setFKTeacherID(Teacher fKTeacherID) {
-        this.fKTeacherID = fKTeacherID;
+    public void setFKUsersID(Userlist fKUsersID) {
+        this.fKUsersID = fKUsersID;
     }
 
     @Override

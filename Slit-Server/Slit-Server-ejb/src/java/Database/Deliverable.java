@@ -6,11 +6,13 @@
 package Database;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -42,41 +44,50 @@ public class Deliverable implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
     @Column(name = "Deliverable_ID")
-    private String deliverableID;
+    private Integer deliverableID;
     @Size(max = 200)
     @Column(name = "Deliverable_message")
     private String deliverablemessage;
-    @Size(max = 50)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "Deliverable_file")
     private String deliverablefile;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "Deliverable_dateSent")
     @Temporal(TemporalType.DATE)
     private Date deliverabledateSent;
     @OneToMany(mappedBy = "fKDeliverableID")
-    private List<Feedback> feedbackList;
+    private Collection<Feedback> feedbackCollection;
     @JoinColumn(name = "FK_Module_ID", referencedColumnName = "Module_ID")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Module fKModuleID;
-    @JoinColumn(name = "FK_Student_ID", referencedColumnName = "Student_ID")
-    @ManyToOne
-    private Student fKStudentID;
+    @JoinColumn(name = "FK_Users_ID", referencedColumnName = "User_ID")
+    @ManyToOne(optional = false)
+    private Userlist fKUsersID;
 
     public Deliverable() {
     }
 
-    public Deliverable(String deliverableID) {
+    public Deliverable(Integer deliverableID) {
         this.deliverableID = deliverableID;
     }
 
-    public String getDeliverableID() {
+    public Deliverable(Integer deliverableID, String deliverablefile, Date deliverabledateSent) {
+        this.deliverableID = deliverableID;
+        this.deliverablefile = deliverablefile;
+        this.deliverabledateSent = deliverabledateSent;
+    }
+
+    public Integer getDeliverableID() {
         return deliverableID;
     }
 
-    public void setDeliverableID(String deliverableID) {
+    public void setDeliverableID(Integer deliverableID) {
         this.deliverableID = deliverableID;
     }
 
@@ -105,12 +116,12 @@ public class Deliverable implements Serializable {
     }
 
     @XmlTransient
-    public List<Feedback> getFeedbackList() {
-        return feedbackList;
+    public Collection<Feedback> getFeedbackCollection() {
+        return feedbackCollection;
     }
 
-    public void setFeedbackList(List<Feedback> feedbackList) {
-        this.feedbackList = feedbackList;
+    public void setFeedbackCollection(Collection<Feedback> feedbackCollection) {
+        this.feedbackCollection = feedbackCollection;
     }
 
     public Module getFKModuleID() {
@@ -121,12 +132,12 @@ public class Deliverable implements Serializable {
         this.fKModuleID = fKModuleID;
     }
 
-    public Student getFKStudentID() {
-        return fKStudentID;
+    public Userlist getFKUsersID() {
+        return fKUsersID;
     }
 
-    public void setFKStudentID(Student fKStudentID) {
-        this.fKStudentID = fKStudentID;
+    public void setFKUsersID(Userlist fKUsersID) {
+        this.fKUsersID = fKUsersID;
     }
 
     @Override

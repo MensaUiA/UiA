@@ -6,7 +6,7 @@
 package SlitServer;
 
 import DataModels.UsersDataModel;
-import Database.Users;
+import Database.Userlist;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,14 +29,18 @@ public class UserSessionBean implements UserSessionBeanRemote {
         UsersDataModel user = new UsersDataModel(); 
         
         try 
-        {
-            Query query = em.createNamedQuery("Users.findByMail", Users.class);
+        {   
+            Query query = em.createNamedQuery("Userlist.findByUsermail", Userlist.class);
         
-            query.setParameter("mail", mail);
+            query.setParameter("usermail", mail);
             
-            Users usersResult = (Users)query.getSingleResult();
+            Userlist usersResult = (Userlist)query.getSingleResult();
             
-            user = this.convertEntity(usersResult);
+            if(usersResult.getUserpasswords().equals(password))
+            {
+               user = this.convertEntity(usersResult);
+            }
+
             
         }catch(Exception e)
         {
@@ -49,38 +53,38 @@ public class UserSessionBean implements UserSessionBeanRemote {
     @Override
     public void createUser(UsersDataModel userDataModel)
     {
-        Users user = this.convertUserDataModel(userDataModel);
+        Userlist user = this.convertUserDataModel(userDataModel);
         
         em.persist(user);
     }
     
     
-    public UsersDataModel convertEntity(Users user)
+    public UsersDataModel convertEntity(Userlist user)
     {
         UsersDataModel userDataModel = new UsersDataModel(); 
         
-        userDataModel.setId(user.getId());
-        userDataModel.setFirstName(user.getFirstName());
-        userDataModel.setLastName(user.getLastName());
-        userDataModel.setMail(user.getMail());
-        userDataModel.setPasswords(user.getPasswords());
-        userDataModel.setUser_type(user.getUserType());
+        userDataModel.setId(user.getUserID());
+        userDataModel.setFirstName(user.getUserfirstName());
+        userDataModel.setLastName(user.getUserlastName());
+        userDataModel.setMail(user.getUsermail());
+        userDataModel.setPasswords(user.getUserpasswords());
+        userDataModel.setUser_type(user.getUsertype());
         
         return userDataModel; 
         
         
     }
 
-     public Users convertUserDataModel(UsersDataModel user)
+     public Userlist convertUserDataModel(UsersDataModel user)
     {
-        Users userDataModel = new Users(); 
+        Userlist userDataModel = new Userlist(); 
         
-        userDataModel.setId(user.getId());
-        userDataModel.setFirstName(user.getFirstName());
-        userDataModel.setLastName(user.getLastName());
-        userDataModel.setMail(user.getMail());
-        userDataModel.setPasswords(user.getPasswords());
-        userDataModel.setUserType(user.getUser_type());
+        userDataModel.setUserID(user.getId());
+        userDataModel.setUserfirstName(user.getFirstName());
+        userDataModel.setUserlastName(user.getLastName());
+        userDataModel.setUsermail(user.getMail());
+        userDataModel.setUserpasswords(user.getPasswords());
+        userDataModel.setUsertype(user.getUser_type());
         
         return userDataModel; 
         

@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
 
 /**
  *
- * @author Haris
+ * @author Tommy
  */
 @Stateless
 public class NewSessionBean implements NewSessionBeanRemote {

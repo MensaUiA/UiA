@@ -8,6 +8,7 @@ package GUI.Controllers;
 import DataModels.UsersDataModel;
 import Framework.Managers.UserManager;
 import Framework.Names.ViewNames;
+import GUI.JavaFXApplication1;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -15,14 +16,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import GUI.*;
 
 /**
  * FXML Controller class
  *
  * @author Cheezy
  */
-public class TestController implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
     private TextField UsernameTextField;
@@ -36,9 +36,8 @@ public class TestController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         this.InfoText.setText("Tommy sliter");
+        // TODO
     }    
-
     @FXML
     private void onClick(ActionEvent event) throws Exception {
         if(!this.PasswordTextField.getText().isEmpty() && !this.UsernameTextField.getText().isEmpty())
@@ -63,5 +62,5 @@ public class TestController implements Initializable {
             this.InfoText.setText("Password and Username can't be null"); 
         }
     }
-    
+      
 }

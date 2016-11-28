@@ -6,11 +6,14 @@
 package Database;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -43,18 +46,23 @@ public class Module implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "Module_ID")
+    private Integer moduleID;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 5)
-    @Column(name = "Module_ID")
-    private String moduleID;
-    @Size(max = 25)
+    @Size(min = 1, max = 25)
     @Column(name = "Module_title")
     private String moduletitle;
-    @Size(max = 400)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 400)
     @Column(name = "Module_description")
     private String moduledescription;
-    @Size(max = 50)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "Module_criteria")
     private String modulecriteria;
     @Size(max = 14)
@@ -63,24 +71,34 @@ public class Module implements Serializable {
     @Size(max = 200)
     @Column(name = "Module_resources")
     private String moduleresources;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "Module_deadline")
     @Temporal(TemporalType.DATE)
     private Date moduledeadline;
-    @OneToMany(mappedBy = "fKModuleID")
-    private List<Deliverable> deliverableList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fKModuleID")
+    private Collection<Deliverable> deliverableCollection;
 
     public Module() {
     }
 
-    public Module(String moduleID) {
+    public Module(Integer moduleID) {
         this.moduleID = moduleID;
     }
 
-    public String getModuleID() {
+    public Module(Integer moduleID, String moduletitle, String moduledescription, String modulecriteria, Date moduledeadline) {
+        this.moduleID = moduleID;
+        this.moduletitle = moduletitle;
+        this.moduledescription = moduledescription;
+        this.modulecriteria = modulecriteria;
+        this.moduledeadline = moduledeadline;
+    }
+
+    public Integer getModuleID() {
         return moduleID;
     }
 
-    public void setModuleID(String moduleID) {
+    public void setModuleID(Integer moduleID) {
         this.moduleID = moduleID;
     }
 
@@ -133,12 +151,12 @@ public class Module implements Serializable {
     }
 
     @XmlTransient
-    public List<Deliverable> getDeliverableList() {
-        return deliverableList;
+    public Collection<Deliverable> getDeliverableCollection() {
+        return deliverableCollection;
     }
 
-    public void setDeliverableList(List<Deliverable> deliverableList) {
-        this.deliverableList = deliverableList;
+    public void setDeliverableCollection(Collection<Deliverable> deliverableCollection) {
+        this.deliverableCollection = deliverableCollection;
     }
 
     @Override

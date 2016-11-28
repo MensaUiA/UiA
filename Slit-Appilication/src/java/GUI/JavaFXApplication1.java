@@ -31,7 +31,8 @@ public class JavaFXApplication1 extends Application {
     
     private HashMap<String, String> views = new HashMap<String, String>() {
         {
-            put(ViewNames.mainView, "test.fxml");
+            put(ViewNames.loginView, "test.fxml");
+            put(ViewNames.mainView, "MainScreen.fxml");
         }
     };
     
@@ -49,7 +50,7 @@ public class JavaFXApplication1 extends Application {
         try
         {
             this.stage = primaryStage;
-            this.setScene(ViewNames.mainView);
+            this.setScene(ViewNames.loginView); 
             this.stage.show();
             
         }
@@ -73,7 +74,7 @@ public class JavaFXApplication1 extends Application {
         Parent page = (Parent) FXMLLoader.load(this.getClass().getResource(fxml), null, new JavaFXBuilderFactory());
         Scene scene = stage.getScene();
         if (scene == null) {
-            scene = new Scene(page, 700, 450);
+            scene = new Scene(page, 590, 420);
             //scene.getStylesheets().add(App.class.getResource("demo.css").toExternalForm());
             stage.setScene(scene);
         } else {

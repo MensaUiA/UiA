@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -36,14 +38,15 @@ public class Push implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
     @Column(name = "Push_ID")
-    private String pushID;
+    private Integer pushID;
     @Size(max = 50)
     @Column(name = "Push_text")
     private String pushtext;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "Push_date")
     @Temporal(TemporalType.DATE)
     private Date pushdate;
@@ -51,15 +54,20 @@ public class Push implements Serializable {
     public Push() {
     }
 
-    public Push(String pushID) {
+    public Push(Integer pushID) {
         this.pushID = pushID;
     }
 
-    public String getPushID() {
+    public Push(Integer pushID, Date pushdate) {
+        this.pushID = pushID;
+        this.pushdate = pushdate;
+    }
+
+    public Integer getPushID() {
         return pushID;
     }
 
-    public void setPushID(String pushID) {
+    public void setPushID(Integer pushID) {
         this.pushID = pushID;
     }
 
