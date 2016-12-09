@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,6 +14,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
 /**
  * Created by Basse on 22.11.2016.
  */
@@ -22,44 +23,29 @@ import javafx.scene.input.KeyEvent;
  
 public class MenuController implements Initializable {
     @FXML
-    private MenuBar menuBar;
+    private MenuBar menuBar; 
  
-    /**
-     * Handle action related to "About" menu item.
-     *
-     * @param event Event on "About" menu item.
-     */
     @FXML
-    private void handleAboutAction(final ActionEvent event)
-    {
+    private void handleAboutAction(final ActionEvent event) {
         provideAboutFunctionality();
     }
- 
-    /**
-     * Handle action related to input (in this case specifically only responds to
-     * keyboard event CTRL-A).
-     *
-     * @param event Input event.
-     */
+    
     @FXML
     private void handleKeyInput(final InputEvent event)
     {
         if (event instanceof KeyEvent)
         {
             final KeyEvent keyEvent = (KeyEvent) event;
-            if (keyEvent.isControlDown() && keyEvent.getCode() == KeyCode.A)
+            if (keyEvent.isControlDown() && keyEvent.getCode() == KeyCode.M)
             {
                 provideAboutFunctionality();
             }
         }
     }
- 
-    /**
-     * Perform functionality associated with "About" menu selection or CTRL-A.
-     */
+
     private void provideAboutFunctionality()
     {
-        System.out.println("You clicked on About!");
+        System.out.println("You clicked on Module!");
     }
  
  

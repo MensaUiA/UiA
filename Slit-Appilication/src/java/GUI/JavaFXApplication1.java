@@ -38,6 +38,7 @@ public class JavaFXApplication1 extends Application {
     
     public JavaFXApplication1() {
         instance = this;
+        
     }
     
     public static JavaFXApplication1 getInstance() {

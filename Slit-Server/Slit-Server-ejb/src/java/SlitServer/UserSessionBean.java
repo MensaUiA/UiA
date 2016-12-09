@@ -56,7 +56,7 @@ public class UserSessionBean implements UserSessionBeanRemote {
         Userlist user = this.convertUserDataModel(userDataModel);
         
         em.persist(user);
-    }
+    }   
     
     
     public UsersDataModel convertEntity(Userlist user)
