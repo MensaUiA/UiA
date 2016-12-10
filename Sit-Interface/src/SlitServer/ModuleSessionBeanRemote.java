@@ -5,10 +5,15 @@
  */
 package SlitServer;
 
+import javax.ejb.Remote;
+import DataModels.ModuleDataModel;
+import java.util.List;
+
 /**
  *
  * @author Cheezy
  */
-interface ModuleSessionBeanRemote {
-    
+@Remote
+public interface ModuleSessionBeanRemote {
+    List<ModuleDataModel> getModules();
 }

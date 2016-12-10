@@ -5,6 +5,8 @@
  */
 package DataModels;
 
+import java.util.Date;
+
 /**
  *
  * @author Cheezy
@@ -22,7 +24,7 @@ public class ModuleDataModel {
     
     private String Module_resources;
     
-    private String Module_deadline;
+    private Date Module_deadline;
 
     public void setModule_ID(int Module_ID) {
         this.Module_ID = Module_ID;
@@ -48,7 +50,7 @@ public class ModuleDataModel {
         this.Module_resources = Module_resources;
     }
 
-    public void setModule_deadline(String Module_deadline) {
+    public void setModule_deadline(Date Module_deadline) {
         this.Module_deadline = Module_deadline;
     }
     
@@ -76,7 +78,7 @@ public class ModuleDataModel {
         return Module_resources;
     }
 
-    public String getModule_deadline() {
+    public Date getModule_deadline() {
         return Module_deadline;
     }
     

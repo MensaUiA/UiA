@@ -69,7 +69,7 @@ public ModuleDataModel convertModule(Module module)
     modulesDataModel.setModule_description(modules.getModule_description());
     modulesDataModel.setModule_criteria(modules.getModule_criteria());
     modulesDataModel.setModule_resources(modules.getModule_resources());
-    modulesDataModel.setModule_status(modules.getModule_deadline());
+    modulesDataModel.setModule_status(modules.getModule_status());
     modulesDataModel.setModule_deadline(modules.getModule_deadline());
     
     return modulesDataModel;
@@ -89,14 +89,19 @@ public Module convertModuleToEntity(ModuleDataModel module)
     ModuleEntity.setModuledescription(modules.getModule_description());
     ModuleEntity.setModulecriteria(modules.getModule_criteria());
     ModuleEntity.setModuleresources(modules.getModule_resources());
-    ModuleEntity.setModulestatus(modules.getModule_deadline());
-    //ModuleEntity.setModuledeadline(modules.getModule_deadline());
+    ModuleEntity.setModulestatus(modules.getModule_status());
+    ModuleEntity.setModuledeadline(modules.getModule_deadline());
     
     return ModuleEntity;
 }
 
 public void persist(Object object){
         em.persist(object);
+    }
+
+    @Override
+    public List<ModuleDataModel> getModules() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
