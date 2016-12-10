@@ -60,7 +60,7 @@ public class TestController implements Initializable {
         }
         else
         {
-            this.InfoText.setText("Password and Username can't be null"); 
+            this.InfoText.setText("Password and Username can't be empty"); 
         }
     }
     

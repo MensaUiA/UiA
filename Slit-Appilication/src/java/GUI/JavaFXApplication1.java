@@ -32,7 +32,7 @@ public class JavaFXApplication1 extends Application {
     private HashMap<String, String> views = new HashMap<String, String>() {
         {
             put(ViewNames.loginView, "Login.fxml");
-            put(ViewNames.mainView, "MainScreen.fxml");
+            put(ViewNames.mainView, "ModuleInfo.fxml");
         }
     };
     
