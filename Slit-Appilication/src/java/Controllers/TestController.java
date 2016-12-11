@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.Controllers;
+package Controllers;
 
+import View.Main;
 import DataModels.UsersDataModel;
 import Framework.Managers.UserManager;
 import Framework.Names.ViewNames;
@@ -15,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import GUI.*;
 
 /**
  * FXML Controller class
@@ -50,7 +50,7 @@ public class TestController implements Initializable {
             if(userModule.getFirstName() != null)
             {
                 this.InfoText.setText("Login successfull");
-                JavaFXApplication1.getInstance().setScene(ViewNames.mainView);
+                Main.getInstance().setScene(ViewNames.mainView);
             }
             else
             {

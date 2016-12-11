@@ -13,7 +13,9 @@ public class ViewNames {
     
     public static final String loginView = "Login"; 
     
-    public static final String mainView = "Main"; 
+    public static final String mainView = "Main";
+    
+    
   
     
 }

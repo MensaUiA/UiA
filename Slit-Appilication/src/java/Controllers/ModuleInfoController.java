@@ -1,4 +1,4 @@
-package GUI.Controllers;
+package Controllers;
 /**
  * Created by Basse.
  */
@@ -13,9 +13,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
-import model.User;
+import Model.User;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class ModuleInfoController implements Initializable {
 
@@ -50,7 +56,7 @@ public class ModuleInfoController implements Initializable {
         firstNameCol.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameCol.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
         moduleOneCol.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
-
+git
         statusBox.setItems(getStatusBoxData());
 
         table.setItems(observableUserList);
@@ -72,6 +78,16 @@ public class ModuleInfoController implements Initializable {
                 provideAddButtonAction();
             }
         }
+    }
+    
+    public void handleTommyClick(ActionEvent event) throws IOException {
+        System.out.println("Tommy sliter");
+        
+        Parent page = FXMLLoader.load(getClass().getResource("View"));
+        Scene scene = new Scene(page);
+        Stage sampleStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        sampleStage.setScene(scene);
+        sampleStage.show();
     }
 
 

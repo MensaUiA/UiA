@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<BorderPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.ModuleInfoController">
+<BorderPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ModuleInfoController">
     <top>
         <GridPane BorderPane.alignment="CENTER">
             <children>
@@ -50,6 +50,7 @@
                         <Button mnemonicParsing="false" fx:id="addBtn" onAction="#handleAddButtonClick" text="Add" />
                         <Button mnemonicParsing="false" fx:id="deleteBtn" onAction="#handleDeleteButtonClick" text="Delete" />
                         <Button mnemonicParsing="false" onAction="#handleClearButtonClick" text="Clear" />
+                        <Button mnemonicParsing="false" fx:id="TommyBtn" onAction="#handleTommyClick" text="Tommy sin knapp" />
                     </children>
                 </HBox>
                 <Label fx:id="printApplicationStatus" prefHeight="17.0" prefWidth="602.0" text="Label" />

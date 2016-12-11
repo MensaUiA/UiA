@@ -7,7 +7,7 @@
 
 <VBox id="vbox" 
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="GUI.Controllers.MenuController">
+      fx:controller="Controllers.MenuController">
     <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
         <menus>
             <Menu text="Overview">

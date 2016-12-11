@@ -1,7 +1,7 @@
 /**
  * Created by Basse.
  */
-package model;
+package Model;
 
 import javafx.beans.property.*;
 

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.Controllers;
+package Controllers;
 
 import DataModels.UsersDataModel;
 import Framework.Managers.UserManager;
 import Framework.Names.ViewNames;
-import GUI.JavaFXApplication1;
+import View.Main;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -50,7 +50,7 @@ public class LoginController implements Initializable {
             if(userModule.getFirstName() != null)
             {
                 this.InfoText.setText("Login successfull");
-                JavaFXApplication1.getInstance().setScene(ViewNames.mainView);
+                Main.getInstance().setScene(ViewNames.mainView);
             }
             else
             {

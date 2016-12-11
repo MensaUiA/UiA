@@ -1,9 +1,11 @@
+package View;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+
 
 
 import Framework.Names.ViewNames;
@@ -23,11 +25,11 @@ import javafx.fxml.FXMLLoader;
  *
  * @author Cheezy
  */
-public class JavaFXApplication1 extends Application {
+public class Main extends Application {
     
     private Stage stage; 
     
-    private static JavaFXApplication1 instance;
+    private static Main instance;
     
     private HashMap<String, String> views = new HashMap<String, String>() {
         {
@@ -36,12 +38,12 @@ public class JavaFXApplication1 extends Application {
         }
     };
     
-    public JavaFXApplication1() {
+    public Main() {
         instance = this;
         
     }
     
-    public static JavaFXApplication1 getInstance() {
+    public static Main getInstance() {
         return instance;
     }
     
