@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
  * FXML Controller class
  *
  * @author Cheezy
+ * @author Basse
  */
 public class TestController implements Initializable {
 
@@ -50,7 +51,7 @@ public class TestController implements Initializable {
             if(userModule.getFirstName() != null)
             {
                 this.InfoText.setText("Login successfull");
-                Main.getInstance().setScene(ViewNames.mainView);
+                Main.getInstance().setScene(ViewNames.loginView);
             }
             else
             {

@@ -8,6 +8,9 @@ package Framework.Names;
 /**
  *
  * @author Cheezy
+ * @author Tommy
+ * @author Basse
+ * 
  */
 public class ViewNames {
     
