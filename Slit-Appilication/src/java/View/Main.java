@@ -35,6 +35,7 @@ public class Main extends Application {
         {
             put(ViewNames.loginView, "Login.fxml");
             put(ViewNames.mainView, "ModuleInfo.fxml");
+            put(ViewNames.createView, "Create.fxml");
         }
     };
     

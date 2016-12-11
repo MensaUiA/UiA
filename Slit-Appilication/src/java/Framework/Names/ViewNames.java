@@ -15,6 +15,7 @@ public class ViewNames {
     
     public static final String mainView = "Main";
     
+    public static final String createView = "Create";
     
   
     
