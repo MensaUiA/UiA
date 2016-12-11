@@ -56,6 +56,35 @@ public List<ModuleDataModel> getModule()
 }
 
 /**
+*@param Module_title 
+*@return ModuleDataModel
+*/
+public ModuleDataModel findModuleByName(String Module_title){
+   
+        ModuleDataModel returnModule = new ModuleDataModel();
+       
+        try
+        {
+            Query query = em.createNamedQuery("Module.findByModuletitle", Module.class);
+           
+            query.setParameter("Module_title", Module_title);
+           
+            Module module = (Module)query.getSingleResult();
+           
+            returnModule = this.convertModule(module);
+        }
+       
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+       
+        return returnModule;
+                 
+}
+ 
+
+/**
  * Converts the module entity to ModuleDataModel
  * @param module
  * @return 

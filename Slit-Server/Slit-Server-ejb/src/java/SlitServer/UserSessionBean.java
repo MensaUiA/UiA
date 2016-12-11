@@ -11,6 +11,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -58,6 +60,31 @@ public class UserSessionBean implements UserSessionBeanRemote {
         em.persist(user);
     }   
     
+     /**
+     
+     */
+     
+    public List<UsersDataModel> getUsers()
+    {
+        List<UsersDataModel> returnUsers = new ArrayList<UsersDataModel>();
+         
+        try
+        {
+            Query query = em.createNamedQuery("UserList.findAll", Userlist.class);
+             
+            List<Userlist> users = query.getResultList();
+             
+            for(Userlist user : users)
+            {
+                returnUsers.add(this.convertEntity(user));
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return returnUsers;
+    }
     
     public UsersDataModel convertEntity(Userlist user)
     {

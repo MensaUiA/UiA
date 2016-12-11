@@ -6,7 +6,6 @@
 package SlitServer;
 
 import javax.ejb.Remote;
-import DataModels.StudentModel; 
 import DataModels.UsersDataModel;
 
 /**
