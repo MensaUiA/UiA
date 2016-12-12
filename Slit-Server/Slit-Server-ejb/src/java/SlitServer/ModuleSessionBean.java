@@ -5,15 +5,23 @@
  */
 package SlitServer;
 
+
 import DataModels.ModuleDataModel;
 import Database.Module;
 import java.util.List;
-import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,111 +34,153 @@ public class ModuleSessionBean implements ModuleSessionBeanRemote {
     @PersistenceContext(unitName = "Slit-Server-ejbPU")
     private EntityManager em;
     
-    ModuleDataModel modules = new ModuleDataModel();
 
-/**
- * Get all the current modules in the database.
- * @return dataModuleModel
- */
-public List<ModuleDataModel> getModule()
-{
-    List<ModuleDataModel> dataModuleModel = new ArrayList<ModuleDataModel>();
-    
-    try
+    /**
+     * Get all the current modules in the database.
+     * @return dataModuleModel
+     */
+    @Override
+    public List<ModuleDataModel> getModules()
     {
-        Query query = em.createNamedQuery("Module.findAll", Module.class);
-        
-        List<Module> moduleList = query.getResultList();
-        
-        for(Module module : moduleList)
-        {
-            dataModuleModel.add(this.convertModule(module));
-        }
-        
-    }
-    catch(Exception e)
-    {
-        e.printStackTrace();
-    }
-    return dataModuleModel;
-}
+        List<ModuleDataModel> dataModuleModel = new ArrayList<ModuleDataModel>();
 
-/**
-*@param Module_title 
-*@return ModuleDataModel
-*/
-public ModuleDataModel findModuleByName(String Module_title){
-   
-        ModuleDataModel returnModule = new ModuleDataModel();
-       
         try
         {
-            Query query = em.createNamedQuery("Module.findByModuletitle", Module.class);
-           
-            query.setParameter("Module_title", Module_title);
-           
-            Module module = (Module)query.getSingleResult();
-           
-            returnModule = this.convertModule(module);
+            Query query = em.createNamedQuery("Module.findAll", Module.class);
+
+            List<Module> moduleList = query.getResultList();
+
+            for(Module module : moduleList)
+            {
+                dataModuleModel.add(this.convertModule(module));
+            }
+
         }
-       
         catch(Exception e)
         {
             e.printStackTrace();
         }
-       
-        return returnModule;
-                 
-}
- 
-
-/**
- * Converts the module entity to ModuleDataModel
- * @param module
- * @return 
- */
-public ModuleDataModel convertModule(Module module)
-{
-    ModuleDataModel modulesDataModel = new ModuleDataModel();
-    
-    modulesDataModel.setModule_ID(module.getModuleID());
-    modulesDataModel.setModule_title(modules.getModule_title());
-    modulesDataModel.setModule_description(modules.getModule_description());
-    modulesDataModel.setModule_criteria(modules.getModule_criteria());
-    modulesDataModel.setModule_resources(modules.getModule_resources());
-    modulesDataModel.setModule_status(modules.getModule_status());
-    modulesDataModel.setModule_deadline(modules.getModule_deadline());
-    
-    return modulesDataModel;
-}
-
-/**
- * Converts ModuleDataModel to an entity
- * @param module
- * @return 
- */
-public Module convertModuleToEntity(ModuleDataModel module)
-{
-    Module ModuleEntity = new Module();
-    
-    ModuleEntity.setModuleID(modules.getModule_ID());
-    ModuleEntity.setModuletitle(modules.getModule_title());
-    ModuleEntity.setModuledescription(modules.getModule_description());
-    ModuleEntity.setModulecriteria(modules.getModule_criteria());
-    ModuleEntity.setModuleresources(modules.getModule_resources());
-    ModuleEntity.setModulestatus(modules.getModule_status());
-    ModuleEntity.setModuledeadline(modules.getModule_deadline());
-    
-    return ModuleEntity;
-}
-
-public void persist(Object object){
-        em.persist(object);
+        return dataModuleModel;
     }
 
+    /**
+    *@param Module_title 
+    *@return ModuleDataModel
+    */
     @Override
-    public List<ModuleDataModel> getModules() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ModuleDataModel findModuleByName(String Module_title){
+
+            ModuleDataModel returnModule = new ModuleDataModel();
+
+            try
+            {
+                Query query = em.createNamedQuery("Module.findByModuletitle", Module.class);
+
+                query.setParameter("Module_title", Module_title);
+
+                Module module = (Module)query.getSingleResult();
+
+                returnModule = this.convertModule(module);
+            }
+
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+
+            return returnModule;
+
+    }
+
+    private Connection getConnection(){
+
+        Connection con = null;
+            try {
+                con = DriverManager.getConnection("jdbc:mysql://:3306/SLIT","root","root");
+            } catch (SQLException ex) {
+                Logger.getLogger(ModuleSessionBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return con;
+    }
+
+
+
+    public ArrayList<ModuleDataModel> getUserz(){
+
+        ArrayList<ModuleDataModel> userz = new ArrayList<ModuleDataModel>();
+
+
+        /*Connection con = getConnection();
+
+        Statement st;
+        ResultSet rs;
+        ModuleDataModel mdm;
+
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT * FROM Module");
+
+            while(rs.next()){
+
+                mdm = new ModuleDataModel (
+                    rs.getString("Module_title"),
+                    rs.getString("Module_description"),
+                    rs.getString("Module_criteria"),
+                    rs.getDate("Module_deadline")
+                );
+                userz.add(mdm);
+            }
+
+        }catch(SQLException ex) {
+             Logger.getLogger(ModuleSessionBean.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+
+        return userz;
+    }
+
+   
+    /**
+     * Converts the module entity to ModuleDataModel
+     * @param module
+     * @return 
+     */
+    public ModuleDataModel convertModule(Module module)
+    {
+        ModuleDataModel modulesDataModel = new ModuleDataModel();
+
+        modulesDataModel.setModule_ID(module.getModuleID());
+        modulesDataModel.setModuleTitle(module.getModuletitle());
+        modulesDataModel.setModule_description(module.getModuledescription());
+        modulesDataModel.setModule_criteria(module.getModulecriteria());
+        modulesDataModel.setModule_resources(module.getModuleresources());
+        modulesDataModel.setModule_status(module.getModulestatus());
+        modulesDataModel.setModule_deadline(module.getModuledeadline());
+
+        return modulesDataModel;
+    }
+
+    /**
+     * Converts ModuleDataModel to an entity
+     * @param module
+     * @return 
+     */
+    public Module convertModuleToEntity(ModuleDataModel module)
+    {
+        Module ModuleEntity = new Module();
+
+        ModuleEntity.setModuleID(module.getModule_ID());
+        ModuleEntity.setModuletitle(module.getModuleTitle());
+        ModuleEntity.setModuledescription(module.getModule_description());
+        ModuleEntity.setModulecriteria(module.getModule_criteria());
+        ModuleEntity.setModuleresources(module.getModule_resources());
+        ModuleEntity.setModulestatus(module.getModule_status());
+        ModuleEntity.setModuledeadline(module.getModule_deadline());
+
+        return ModuleEntity;
+    }
+
+    public void persist(Object object){
+            em.persist(object);
     }
 
 }

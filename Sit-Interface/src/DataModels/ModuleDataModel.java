@@ -11,11 +11,11 @@ import java.util.Date;
  *
  * @author Cheezy
  */
-public class ModuleDataModel {
+public class ModuleDataModel implements java.io.Serializable {
     private int Module_ID;
     
-    private String Module_title;
-    
+    private String ModuleTitle;
+
     private String Module_description;
     
     private String Module_criteria;
@@ -26,14 +26,20 @@ public class ModuleDataModel {
     
     private Date Module_deadline;
 
+    public String getModuleTitle() {
+        return ModuleTitle;
+    }
+
+    public void setModuleTitle(String ModuleTitle) {
+        this.ModuleTitle = ModuleTitle;
+    }
+    
+    
     public void setModule_ID(int Module_ID) {
         this.Module_ID = Module_ID;
     }
 
-    public void setModule_title(String Module_title) {
-        this.Module_title = Module_title;
-    }
-
+  
     public void setModule_description(String Module_description) {
         this.Module_description = Module_description;
     }
@@ -56,10 +62,6 @@ public class ModuleDataModel {
     
     public int getModule_ID() {
         return Module_ID;
-    }
-
-    public String getModule_title() {
-        return Module_title;
     }
 
     public String getModule_description() {

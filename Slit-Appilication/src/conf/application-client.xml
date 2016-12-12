@@ -11,4 +11,9 @@
     <ejb-ref-type>Session</ejb-ref-type>
     <remote>SlitServer.UserSessionBeanRemote</remote>
   </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ModuleSessionBean</ejb-ref-name>
+    <ejb-ref-type>Session</ejb-ref-type>
+    <remote>SlitServer.ModuleSessionBeanRemote</remote>
+  </ejb-ref>
 </application-client>

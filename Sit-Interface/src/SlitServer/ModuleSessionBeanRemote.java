@@ -16,4 +16,7 @@ import java.util.List;
 @Remote
 public interface ModuleSessionBeanRemote {
     List<ModuleDataModel> getModules();
+    
+    ModuleDataModel findModuleByName(String Module_title);
+    
 }

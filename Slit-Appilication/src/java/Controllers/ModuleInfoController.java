@@ -3,6 +3,10 @@ package Controllers;
  * Created by Basse.
  */
 
+import Common.DeliveryListObject;
+import DataModels.ModuleDataModel;
+import DataModels.UsersDataModel;
+import Framework.Managers.ModuleManager;
 import Framework.Names.ViewNames;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,12 +27,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class ModuleInfoController implements Initializable {
 
+     @FXML
+    private TableView<DeliveryListObject> table;
+    
     @FXML
-    private TableColumn<User, String> firstNameCol, lastNameCol, moduleOneCol;
+    private TableColumn<DeliveryListObject, String> firstNameCol, lastNameCol, moduleOneCol, moduleTwoCol, moduleThreeCol, moduleFourCol; 
 
     @FXML
     private TextField firstNameField, lastNameField, filterSearchInput;
@@ -36,32 +44,64 @@ public class ModuleInfoController implements Initializable {
     @FXML
     private ComboBox<String> statusBox;
 
-    @FXML
-    private TableView<User> table;
 
     @FXML
     private Label printApplicationStatus;
 
     ObservableList<User> observableUserList = FXCollections.observableArrayList();
+    
+    private ModuleManager moduleManager = new ModuleManager(); 
+    @FXML
+    private Button addBtn;
+    @FXML
+    private Button deleteBtn;
+    @FXML
+    private Button TommyBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        filterSearchInput.textProperty().addListener(new ChangeListener() {
+        /*filterSearchInput.textProperty().addListener(new ChangeListener() {
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 filterObservableUserList((String) oldValue, (String) newValue);
             }
-        });
+        });*/
 
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-        firstNameCol.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-        lastNameCol.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-        moduleOneCol.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
+        //table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
-        statusBox.setItems(getStatusBoxData());
+        
+        this.moduleTwoCol.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("ModuleTitle"));
+        this.lastNameCol.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_status"));
+        this.moduleOneCol.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_ID"));
+        this.moduleThreeCol.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_description"));
+         this.moduleThreeCol.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_deadline"));
+        
+        ObservableList<DeliveryListObject> listData = FXCollections.observableArrayList();
+        
+        for(ModuleDataModel model : this.moduleManager.getModules())
+        {
+            DeliveryListObject listObject = new DeliveryListObject(); 
+            listObject.setModuleTitle(model.getModuleTitle());
+            listObject.setModule_ID(model.getModule_ID());
+            listObject.setModule_deadline(model.getModule_deadline().toString());
+            listObject.setModule_description(model.getModule_description());
+            listObject.setModule_status(model.getModule_description());
+     
+            listData.add(listObject); 
+        }
+        
+        table.setItems(listData);
+         
+         
+        //firstNameCol.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        //lastNameCol.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+        //moduleOneCol.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
+        
+       
 
-        table.setItems(observableUserList);
+        
+        
+        //table.setItems(observableUserList);
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         table.setPlaceholder(new Label("Your Table is Empty"));
 
@@ -71,6 +111,7 @@ public class ModuleInfoController implements Initializable {
     /*
     .........................................Control handlers.........................................
          */
+    @FXML
     public void handleAddButtonClick(ActionEvent event) {
         /*
         Get input from user and add to Table
@@ -82,6 +123,7 @@ public class ModuleInfoController implements Initializable {
         }
     }
     
+    @FXML
     public void handleTommyClick(ActionEvent event) throws IOException, Exception {
         System.out.println("Tommy sliter");
         
@@ -114,6 +156,7 @@ public class ModuleInfoController implements Initializable {
     /*
     handle column edits
      */
+    @FXML
     public void firstNameCol_OnEditCommit(Event e) {
         TableColumn.CellEditEvent<User, String> cellEditEvent;
         cellEditEvent = (TableColumn.CellEditEvent<User, String>) e;
@@ -121,6 +164,7 @@ public class ModuleInfoController implements Initializable {
         user.setFirstName(cellEditEvent.getNewValue());
     }
 
+    @FXML
     public void lastNameCol_OnEditCommit(Event e) {
         TableColumn.CellEditEvent<User, String> cellEditEvent;
         cellEditEvent = (TableColumn.CellEditEvent<User, String>) e;
@@ -128,6 +172,7 @@ public class ModuleInfoController implements Initializable {
         user.setLastName(cellEditEvent.getNewValue());
     }
 
+    @FXML
     public void moduleOneCol_OnEditCommit(Event e) {
         TableColumn.CellEditEvent<User, String> cellEditEvent;
         cellEditEvent = (TableColumn.CellEditEvent<User, String>) e;
@@ -135,37 +180,21 @@ public class ModuleInfoController implements Initializable {
         user.setStatus(cellEditEvent.getNewValue());
     }
 
+    @FXML
     public void handleDeleteButtonClick(ActionEvent event) {
-        ObservableList<User> userSelected;
+        /*ObservableList<ModuleDataModel> userSelected;
         userSelected = table.getItems();
         if(!userSelected.isEmpty()) {
             userSelected.removeAll(table.getSelectionModel().getSelectedItems());
             table.getSelectionModel().clearSelection();
-        }
+        }*/
     }
 
+    @FXML
     public void handleClearButtonClick(ActionEvent event) {
         firstNameField.clear();
         lastNameField.clear();
         statusBox.setValue("Status");
-    }
-
-    public void filterObservableUserList(String oldValue, String newValue) {
-        ObservableList<User> filteredList = FXCollections.observableArrayList();
-        if(filterSearchInput == null || (newValue.length() < oldValue.length())) {
-           table.setItems(observableUserList);
-        }
-        else {
-            newValue = newValue.toUpperCase();
-            for(User users : table.getItems()) {
-                String filterFirstName = users.getFirstName();
-                String filterLastName = users.getLastName();
-                if(filterFirstName.toUpperCase().contains(newValue) || filterLastName.toUpperCase().contains(newValue)) {
-                    filteredList.add(users);
-                }
-            }
-            table.setItems(filteredList);
-        }
     }
 
     /*
@@ -173,7 +202,7 @@ public class ModuleInfoController implements Initializable {
          */
 
     public void provideAddButtonAction() {
-        filterSearchInput.clear();
+        /*filterSearchInput.clear();
         User user = new User();
         user.setFirstName(firstNameField.getText());
         user.setLastName(lastNameField.getText());
@@ -182,7 +211,7 @@ public class ModuleInfoController implements Initializable {
         System.out.println(user.toString());
         firstNameField.clear();
         lastNameField.clear();
-        statusBox.setValue("Status");
+        statusBox.setValue("Status");*/
     }
 
     public ObservableList<String> getStatusBoxData(){
