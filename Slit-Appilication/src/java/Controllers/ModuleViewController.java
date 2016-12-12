@@ -5,8 +5,12 @@
  */
 package Controllers;
 
+import DataModels.ModuleDataModel;
+import SlitServer.ModuleSessionBeanRemote;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +23,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 /**
  * FXML Controller class
@@ -68,10 +75,27 @@ public class ModuleViewController implements Initializable {
 
     @FXML
     private void saveModuleFired(ActionEvent event) {
+        ModuleDataModel object = new ModuleDataModel();
+        object.setModuleTitle(synopsis.getText());
+        object.setModule_description(descriptionValue.getText());
+        // TO DO: add deadline
+        lookupModuleSessionBeanRemote().createModule(object);
     }
 
     @FXML
     private void deleteModuleFired(ActionEvent event) {
     }
+
+    private ModuleSessionBeanRemote lookupModuleSessionBeanRemote() {
+        try {
+            Context c = new InitialContext();
+            return (ModuleSessionBeanRemote) c.lookup("java:comp/env/ModuleSessionBean");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+    
+    
     
 }

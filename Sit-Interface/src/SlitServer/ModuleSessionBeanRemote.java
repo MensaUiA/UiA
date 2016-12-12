@@ -18,5 +18,7 @@ public interface ModuleSessionBeanRemote {
     List<ModuleDataModel> getModules();
     
     ModuleDataModel findModuleByName(String Module_title);
+
+    void createModule(ModuleDataModel parameter);
     
 }

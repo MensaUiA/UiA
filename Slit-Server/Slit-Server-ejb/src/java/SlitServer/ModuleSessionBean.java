@@ -158,7 +158,9 @@ public class ModuleSessionBean implements ModuleSessionBeanRemote {
 
         return modulesDataModel;
     }
-
+    
+    
+    
     /**
      * Converts ModuleDataModel to an entity
      * @param module
@@ -183,5 +185,13 @@ public class ModuleSessionBean implements ModuleSessionBeanRemote {
             em.persist(object);
     }
 
+    @Override
+    public void createModule(ModuleDataModel obj) {
+        obj.setModule_ID(Integer.SIZE);
+        em.persist(convertModuleToEntity(obj));
+    }
+
+    
+    
 }
 
