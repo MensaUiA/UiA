@@ -16,7 +16,7 @@ import javax.naming.NamingException;
 
 /**
  *
- * @author Cheezy
+ * @author Cheezy, Basse
  */
 public class ModuleManager {
 

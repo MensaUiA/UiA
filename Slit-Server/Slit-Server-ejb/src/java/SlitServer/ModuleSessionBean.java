@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Cheezy
+ * @author Cheezy, Basse
  */
 @Stateless
 @LocalBean

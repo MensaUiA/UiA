@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author Cheezy
+ * @author Cheezy, Basse
  */
 public class ModuleDataModel implements java.io.Serializable {
     private int Module_ID;
