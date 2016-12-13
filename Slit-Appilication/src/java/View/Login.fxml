@@ -18,10 +18,10 @@
             <TextField fx:id="UsernameTextField" layoutX="248.0" layoutY="103.0" />
             <Pane layoutY="262.0" prefHeight="36.0" prefWidth="600.0">
                <children>
-                  <Label fx:id="InfoText" layoutX="14.0" layoutY="10.0" prefHeight="17.0" prefWidth="573.0" text="Info" />
+                  <Label fx:id="InfoText" layoutX="14.0" layoutY="10.0" prefHeight="17.0" prefWidth="573.0" />
                </children>
             </Pane>
-            <Button layoutX="334.0" layoutY="184.0" mnemonicParsing="false" onAction="#onClick" prefHeight="17.0" prefWidth="63.0" text="Button" />
+            <Button layoutX="334.0" layoutY="184.0" mnemonicParsing="false" onAction="#onClick" prefHeight="17.0" prefWidth="63.0" text="Login" />
             <PasswordField fx:id="PasswordTextField" layoutX="248.0" layoutY="151.0" />
          </children>
       </Pane>

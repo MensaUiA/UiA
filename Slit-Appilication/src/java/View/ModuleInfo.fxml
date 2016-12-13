@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -17,25 +12,29 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ModuleInfoController">
+<BorderPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ModuleInfoController">
     <top>
         <GridPane BorderPane.alignment="CENTER">
             <children>
-                <fx:include source="Menu.fxml" fx:id="MenuBar" GridPane.rowIndex="0"/>
-                <TextField fx:id="filterSearchInput" promptText="Search..." GridPane.rowIndex="1" />
+                <fx:include fx:id="MenuBar" source="Menu.fxml" GridPane.rowIndex="0" />
+                <TextField fx:id="filterSearchInput" prefHeight="25.0" prefWidth="600.0" promptText="Search..." GridPane.rowIndex="1" />
             </children>
+         <columnConstraints>
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
         </GridPane>
     </top>
     <center>
         <TableView fx:id="table" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="firstNameCol" onEditCommit="#firstNameCol_OnEditCommit" prefWidth="64.0" text="First Name" />
-                <TableColumn fx:id="lastNameCol" onEditCommit="#lastNameCol_OnEditCommit" prefWidth="64.0" text="Last Name" />
-                <TableColumn fx:id="moduleOneCol" onEditCommit="#moduleOneCol_OnEditCommit" prefWidth="64.0" text="Module 1" />
-                <TableColumn fx:id="moduleTwoCol" prefWidth="64.0" text="Module 2" />
-                <TableColumn fx:id="moduleThreeCol" prefWidth="64.0" text="Module 3" />
-                <TableColumn fx:id="moduleFourCol" prefWidth="64.0" text="Module 4" />
+                <TableColumn fx:id="moduleID" onEditCommit="#firstNameCol_OnEditCommit" prefWidth="64.0" text="ID" />
+                <TableColumn fx:id="moduleTitle" onEditCommit="#lastNameCol_OnEditCommit" prefWidth="161.0" text="Title" />
+                <TableColumn fx:id="moduleDescription" onEditCommit="#moduleOneCol_OnEditCommit" prefWidth="193.0" text="Description" />
+                <TableColumn fx:id="moduleDeadline" prefWidth="181.0" text="Deadline" />
             </columns>
         </TableView>
     </center>
@@ -44,16 +43,10 @@
             <children>
                 <HBox prefHeight="28.0" prefWidth="600.0">
                     <children>
-                        <TextField fx:id="firstNameField" promptText="First name..." />
-                        <TextField fx:id="lastNameField" prefWidth="146.0" promptText="Last name..." />
-                        <ComboBox fx:id="statusBox" prefHeight="27.0" prefWidth="93.0" promptText="Status" />
-                        <Button mnemonicParsing="false" fx:id="addBtn" onAction="#handleAddButtonClick" text="Add" />
-                        <Button mnemonicParsing="false" fx:id="deleteBtn" onAction="#handleDeleteButtonClick" text="Delete" />
-                        <Button mnemonicParsing="false" onAction="#handleClearButtonClick" text="Clear" />
-                        <Button mnemonicParsing="false" fx:id="TommyBtn" onAction="#handleTommyClick" text="Tommy sin knapp" />
+                        <Button fx:id="TommyBtn" mnemonicParsing="false" onAction="#handleTommyClick" text="Add module" />
                     </children>
                 </HBox>
-                <Label fx:id="printApplicationStatus" prefHeight="17.0" prefWidth="602.0" text="Label" />
+                <Label fx:id="printApplicationStatus" prefHeight="17.0" prefWidth="602.0" text=". . ." />
             </children>
         </VBox>
     </bottom>

@@ -78,7 +78,7 @@ public class Main extends Application {
         Parent page = (Parent) FXMLLoader.load(this.getClass().getResource(fxml), null, new JavaFXBuilderFactory());
         Scene scene = stage.getScene();
         if (scene == null) {
-            scene = new Scene(page, 590, 420);
+            scene = new Scene(page, 600, 401);
             //scene.getStylesheets().add(App.class.getResource("demo.css").toExternalForm());
             stage.setScene(scene);
         } else {

@@ -36,12 +36,12 @@ public class ModuleInfoController implements Initializable {
     private TableView<DeliveryListObject> table;
     
     @FXML
-    private TableColumn<DeliveryListObject, String> firstNameCol, lastNameCol, moduleOneCol, moduleTwoCol, moduleThreeCol, moduleFourCol; 
+    private TableColumn<DeliveryListObject, String> moduleID, moduleTitle, moduleDescription, moduleDeadline; 
+    private TextField firstNameField;
 
     @FXML
-    private TextField firstNameField, lastNameField, filterSearchInput;
+    private TextField lastNameField, filterSearchInput;
 
-    @FXML
     private ComboBox<String> statusBox;
 
 
@@ -51,10 +51,6 @@ public class ModuleInfoController implements Initializable {
     ObservableList<User> observableUserList = FXCollections.observableArrayList();
     
     private ModuleManager moduleManager = new ModuleManager(); 
-    @FXML
-    private Button addBtn;
-    @FXML
-    private Button deleteBtn;
     @FXML
     private Button TommyBtn;
 
@@ -69,12 +65,11 @@ public class ModuleInfoController implements Initializable {
 
         //table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
-        
-        this.moduleTwoCol.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("ModuleTitle"));
-        this.lastNameCol.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_status"));
-        this.moduleOneCol.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_ID"));
-        this.moduleThreeCol.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_description"));
-         this.moduleThreeCol.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_deadline"));
+        this.moduleID.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_ID"));
+        this.moduleTitle.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("ModuleTitle"));
+        this.moduleDescription.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_description"));
+        this.moduleDeadline.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_deadline"));
+        //this.lastNameCol.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_status"));
         
         ObservableList<DeliveryListObject> listData = FXCollections.observableArrayList();
         
@@ -111,7 +106,6 @@ public class ModuleInfoController implements Initializable {
     /*
     .........................................Control handlers.........................................
          */
-    @FXML
     public void handleAddButtonClick(ActionEvent event) {
         /*
         Get input from user and add to Table
@@ -180,7 +174,6 @@ public class ModuleInfoController implements Initializable {
         user.setStatus(cellEditEvent.getNewValue());
     }
 
-    @FXML
     public void handleDeleteButtonClick(ActionEvent event) {
         /*ObservableList<ModuleDataModel> userSelected;
         userSelected = table.getItems();
@@ -190,7 +183,6 @@ public class ModuleInfoController implements Initializable {
         }*/
     }
 
-    @FXML
     public void handleClearButtonClick(ActionEvent event) {
         firstNameField.clear();
         lastNameField.clear();
