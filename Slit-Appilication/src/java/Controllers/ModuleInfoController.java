@@ -60,14 +60,16 @@ public class ModuleInfoController implements Initializable {
     @FXML
     private Button overviewBtn;
 
+    ObservableList<DeliveryListObject> listData = FXCollections.observableArrayList();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        /*filterSearchInput.textProperty().addListener(new ChangeListener() {
+        filterSearchInput.textProperty().addListener(new ChangeListener() {
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 filterObservableUserList((String) oldValue, (String) newValue);
             }
-        });*/
+        });
 
         //table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
@@ -77,7 +79,7 @@ public class ModuleInfoController implements Initializable {
         this.moduleDeadline.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_deadline"));
         //this.lastNameCol.setCellValueFactory(new PropertyValueFactory<DeliveryListObject, String>("Module_status"));
         
-        ObservableList<DeliveryListObject> listData = FXCollections.observableArrayList();
+        
         
         for(ModuleDataModel model : this.moduleManager.getModules())
         {
@@ -225,6 +227,25 @@ public class ModuleInfoController implements Initializable {
     
     public void handleLogoutAction(ActionEvent event) throws Exception{
         Main.getInstance().setScene(ViewNames.loginView);
+    }
+    
+    public void filterObservableUserList(String oldValue, String newValue) {
+        ObservableList<DeliveryListObject> filteredList = FXCollections.observableArrayList();
+        if(filterSearchInput == null || (newValue.length() < oldValue.length()) || newValue == null) {
+            table.setItems(listData);
+        }
+        else {
+            newValue = newValue.toUpperCase();
+            for(DeliveryListObject model : table.getItems()) {
+                String filterModuleTitle = model.getModuleTitle();
+                String filterModuleDescription = model.getModule_description();
+                if(filterModuleTitle.toUpperCase().contains(newValue) || filterModuleDescription.toUpperCase().contains(newValue))
+                {
+                    filteredList.add(model);
+                }
+            }
+            table.setItems(filteredList);
+        } 
     }
 
 

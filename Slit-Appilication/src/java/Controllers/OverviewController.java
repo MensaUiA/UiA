@@ -18,6 +18,8 @@ import View.Main;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.collections.ObservableList;
@@ -44,22 +46,25 @@ public class OverviewController implements Initializable{
     private final UserManager userManager = new UserManager();
     private ModuleManager moduleManager = new ModuleManager();
     private DeliverableManager deliverableManager = new DeliverableManager(); 
-    @FXML
-    private Button overviewBtn;
-    @FXML
-    private Button moduleBtn;
-    @FXML
-    private Button logoutBtn;
+    @FXML private Button overviewBtn, moduleBtn,logoutBtn;
+    
+    ObservableList<OverviewListObject> listData = FXCollections.observableArrayList();
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        filterSearchInput.textProperty().addListener(new ChangeListener() {
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                filterObservableUserList((String) oldValue, (String) newValue);
+            }
+        });
     
         this.firstNameCol.setCellValueFactory(new PropertyValueFactory<OverviewListObject, String>("firstName"));
         this.lastNameCol.setCellValueFactory(new PropertyValueFactory<OverviewListObject, String>("lastName"));
         this.moduleOneCol.setCellValueFactory(new PropertyValueFactory<OverviewListObject, String>("ModuleTitle"));
         this.statusCol.setCellValueFactory(new PropertyValueFactory<OverviewListObject, String>("status")); 
         
-        ObservableList<OverviewListObject> listData = FXCollections.observableArrayList();
 
         
         List<UsersDataModel> users = this.userManager.getUsers(); 
@@ -100,6 +105,25 @@ public class OverviewController implements Initializable{
     
     public void handleLogoutAction(ActionEvent event) throws Exception{
         Main.getInstance().setScene(ViewNames.loginView);
+    }
+    
+    public void filterObservableUserList(String oldValue, String newValue) {
+        ObservableList<OverviewListObject> filteredList = FXCollections.observableArrayList();
+        if(filterSearchInput == null || (newValue.length() < oldValue.length()) || newValue == null) {
+            table.setItems(listData);
+        }
+        else {
+            newValue = newValue.toUpperCase();
+            for(OverviewListObject model : table.getItems()) {
+                String filterFirstName = model.getFirstName();
+                String filterLastName = model.getLastName();
+                if(filterFirstName.toUpperCase().contains(newValue) || filterLastName.toUpperCase().contains(newValue))
+                {
+                    filteredList.add(model);
+                }
+            }
+            table.setItems(filteredList);
+        } 
     }
     
 }
