@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Cheezy
+ * @author Cheezy, Basse
  */
 @Stateless
 public class UserSessionBean implements UserSessionBeanRemote {
@@ -70,7 +70,7 @@ public class UserSessionBean implements UserSessionBeanRemote {
          
         try
         {
-            Query query = em.createNamedQuery("UserList.findAll", Userlist.class);
+            Query query = em.createNamedQuery("Userlist.findAll", Userlist.class);
              
             List<Userlist> users = query.getResultList();
              

@@ -29,13 +29,14 @@ public class Main extends Application {
     
     private Stage stage; 
     
-    private static Main instance;
+    private static Main instance; 
     
     private HashMap<String, String> views = new HashMap<String, String>() {
         {
             put(ViewNames.loginView, "Login.fxml");
             put(ViewNames.mainView, "ModuleInfo.fxml");
             put(ViewNames.createView, "Create.fxml");
+            put(ViewNames.overviewView, "Overview.fxml"); 
         }
     };
     
@@ -54,7 +55,9 @@ public class Main extends Application {
         try
         {
             this.stage = primaryStage;
+
             this.setScene(ViewNames.loginView); 
+            //this.setScene(ViewNames.overviewView);
             this.stage.show();
             
         }

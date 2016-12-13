@@ -7,6 +7,7 @@ package Framework.Managers;
 
 import DataModels.UsersDataModel;
 import SlitServer.UserSessionBeanRemote;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -15,7 +16,7 @@ import javax.naming.NamingException;
 
 /**
  *
- * @author Cheezy
+ * @author Cheezy, Basse
  */
 public class UserManager {
 
@@ -39,6 +40,10 @@ public class UserManager {
     public void createUser(UsersDataModel userDataModel)
     {
         this.lookupUserSessionBeanRemote().createUser(userDataModel);
+    }
+    
+    public List<UsersDataModel> getUsers() {
+        return this.lookupUserSessionBeanRemote().getUsers();
     }
 
     

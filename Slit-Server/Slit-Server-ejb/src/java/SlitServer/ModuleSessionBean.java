@@ -6,7 +6,9 @@
 package SlitServer;
 
 
+import DataModels.DeliverableDataModel;
 import DataModels.ModuleDataModel;
+import Database.Deliverable;
 import Database.Module;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -62,7 +64,8 @@ public class ModuleSessionBean implements ModuleSessionBeanRemote {
         }
         return dataModuleModel;
     }
-
+    
+    
     /**
     *@param Module_title 
     *@return ModuleDataModel
@@ -79,6 +82,34 @@ public class ModuleSessionBean implements ModuleSessionBeanRemote {
                 query.setParameter("Module_title", Module_title);
 
                 Module module = (Module)query.getSingleResult();
+
+                returnModule = this.convertModule(module);
+            }
+
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+
+            return returnModule;
+
+    }
+    
+    @Override
+    public ModuleDataModel findModuleById(int moduleId){
+
+            ModuleDataModel returnModule = new ModuleDataModel();
+
+            try
+            {
+                
+                Module module = em.find(Module.class, moduleId); 
+                
+                /*Query query = em.createNamedQuery("Module.findByModuleID", Module.class);
+
+                query.setParameter("ModuleID", moduleId);
+
+                Module module = (Module)query.getSingleResult();*/
 
                 returnModule = this.convertModule(module);
             }
@@ -158,6 +189,8 @@ public class ModuleSessionBean implements ModuleSessionBeanRemote {
 
         return modulesDataModel;
     }
+    
+    
     
     
     

@@ -20,6 +20,8 @@ public class ViewNames {
     
     public static final String createView = "Create";
     
+    public static final String overviewView = "Overview"; 
+    
   
     
 }

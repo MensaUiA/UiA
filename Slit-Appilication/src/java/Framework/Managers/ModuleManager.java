@@ -36,4 +36,9 @@ public class ModuleManager {
         return this.lookupModuleSessionBeanRemote().getModules();
     }
     
+    public ModuleDataModel getModuleFromId(int id) 
+    {
+        return this.lookupModuleSessionBeanRemote().findModuleById(id); 
+    }
+    
 }

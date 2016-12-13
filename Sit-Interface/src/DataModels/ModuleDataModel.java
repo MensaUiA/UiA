@@ -25,7 +25,7 @@ public class ModuleDataModel implements java.io.Serializable {
     private String Module_resources;
     
     private Date Module_deadline;
-
+    
     public ModuleDataModel(int Module_ID, String ModuleTitle, String Module_description, String Module_criteria, String Module_resources, Date Module_deadline) {
         this.Module_ID = Module_ID;
         this.ModuleTitle = ModuleTitle;

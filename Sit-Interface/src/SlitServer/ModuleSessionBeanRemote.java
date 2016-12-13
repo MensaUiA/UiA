@@ -21,4 +21,5 @@ public interface ModuleSessionBeanRemote {
 
     void createModule(ModuleDataModel parameter);
     
+    ModuleDataModel findModuleById(int moduleId);
 }

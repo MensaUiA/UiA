@@ -39,13 +39,13 @@ public class ModuleInfoController implements Initializable {
     private TableColumn<DeliveryListObject, String> moduleID, moduleTitle, moduleDescription, moduleDeadline; 
     private TextField firstNameField;
 
+    private TextField lastNameField;
     @FXML
-    private TextField lastNameField, filterSearchInput;
+    private TextField filterSearchInput;
 
     private ComboBox<String> statusBox;
 
 
-    @FXML
     private Label printApplicationStatus;
 
     ObservableList<User> observableUserList = FXCollections.observableArrayList();
@@ -53,6 +53,12 @@ public class ModuleInfoController implements Initializable {
     private ModuleManager moduleManager = new ModuleManager(); 
     @FXML
     private Button TommyBtn;
+    @FXML
+    private Button logoutBtn;
+    @FXML
+    private Button modulesBtn;
+    @FXML
+    private Button overviewBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -211,6 +217,14 @@ public class ModuleInfoController implements Initializable {
         data.add(new String("Approved"));
         data.add(new String("Failed"));
         return data;
+    }
+
+    public void handleOverviewAction(ActionEvent event) throws Exception{
+        Main.getInstance().setScene(ViewNames.overviewView);
+    }
+    
+    public void handleLogoutAction(ActionEvent event) throws Exception{
+        Main.getInstance().setScene(ViewNames.loginView);
     }
 
 

@@ -1,35 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ModuleInfoController">
     <top>
         <GridPane BorderPane.alignment="CENTER">
-            <children>
-                <fx:include fx:id="MenuBar" source="Menu.fxml" GridPane.rowIndex="0" />
-                <TextField fx:id="filterSearchInput" prefHeight="25.0" prefWidth="600.0" promptText="Search..." GridPane.rowIndex="1" />
-            </children>
          <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
             <ColumnConstraints />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints />
             <RowConstraints />
          </rowConstraints>
+         <children>
+            <Button fx:id="TommyBtn" mnemonicParsing="false" onAction="#handleTommyClick" prefWidth="100.0" text="Add module" GridPane.columnIndex="6" />
+            <Button fx:id="logoutBtn" onAction ="#handleLogoutAction" mnemonicParsing="false" prefWidth="60.0" text="Logout" GridPane.columnIndex="5" />
+            <Button fx:id="modulesBtn" mnemonicParsing="false" prefWidth="100.0" text="Modules" GridPane.columnIndex="1" />
+            <Button fx:id="overviewBtn" onAction ="#handleOverviewAction"  maxHeight="25.0" maxWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="Overview" />
+         </children>
         </GridPane>
     </top>
     <center>
-        <TableView fx:id="table" BorderPane.alignment="CENTER">
+        <TableView fx:id="table" prefHeight="566.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="moduleID" onEditCommit="#firstNameCol_OnEditCommit" prefWidth="64.0" text="ID" />
                 <TableColumn fx:id="moduleTitle" onEditCommit="#lastNameCol_OnEditCommit" prefWidth="161.0" text="Title" />
@@ -39,14 +45,9 @@
         </TableView>
     </center>
     <bottom>
-        <VBox prefHeight="47.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="0.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <HBox prefHeight="28.0" prefWidth="600.0">
-                    <children>
-                        <Button fx:id="TommyBtn" mnemonicParsing="false" onAction="#handleTommyClick" text="Add module" />
-                    </children>
-                </HBox>
-                <Label fx:id="printApplicationStatus" prefHeight="17.0" prefWidth="602.0" text=". . ." />
+                <TextField fx:id="filterSearchInput" prefHeight="0.0" prefWidth="600.0" promptText="Search..." />
             </children>
         </VBox>
     </bottom>

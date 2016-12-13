@@ -7,13 +7,19 @@ package SlitServer;
 
 import javax.ejb.Remote;
 import DataModels.UsersDataModel;
+import java.util.List;
 
 /**
  *
- * @author Cheezy
+ * @author Cheezy, Basse
  */
 @Remote
 public interface UserSessionBeanRemote {
+    
+    List<UsersDataModel> getUsers();
+
+    @Override
+    public boolean equals(Object obj);
     
     UsersDataModel loginUser(String userName, String password); 
     

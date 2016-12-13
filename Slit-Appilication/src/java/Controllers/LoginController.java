@@ -50,7 +50,7 @@ public class LoginController implements Initializable {
             if(userModule.getFirstName() != null)
             {
                 this.InfoText.setText("Login successfull");
-                Main.getInstance().setScene(ViewNames.mainView);
+                Main.getInstance().setScene(ViewNames.overviewView);
             }
             else
             {
